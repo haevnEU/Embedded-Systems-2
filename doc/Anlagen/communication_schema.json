@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "device": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "battery": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "battery"
+      ]
+    },
+    "water": {
+      "type": "object",
+      "properties": {
+        "max": {
+          "type": "integer"
+        },
+        "min": {
+          "type": "integer"
+        },
+        "current": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max",
+        "min",
+        "current"
+      ]
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "long": {
+          "type": "number"
+        },
+        "lat": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "long",
+        "lat"
+      ]
+    }
+  },
+  "required": [
+    "device",
+    "water",
+    "location"
+  ]
+}

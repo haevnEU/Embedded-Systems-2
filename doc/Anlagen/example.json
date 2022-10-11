@@ -1,0 +1,16 @@
+{
+    "device":{
+        "name": "",
+        "id": "UUID",
+        "battery": 50
+    },
+    "water":{
+        "max": 5000,
+        "min": 500,
+        "current": 2500
+    },
+    "location": {
+        "long":6.927279,
+        "lat": 51.527389
+    }
+}

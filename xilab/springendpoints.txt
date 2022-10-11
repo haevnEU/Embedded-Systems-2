@@ -1,0 +1,135 @@
+device =
+{
+    "deviceData":{              # Information about the device
+        "name": String,         # Device name
+        "uuid": String,         # UUID of the device
+        "battery": Integer      # Battery charge percentage of the device
+    },
+    "locationData":{            # Position of the device
+        "latitude": Number,     # Latitude  of the device
+        "longitude": Number     # Longitude of the device
+    },
+    "waterSensorData":{         # Information about the water
+        "max": Integer,         # Maximum water level
+        "min": Integer,         # Minimum water level
+        "current": Integer      # Current water level
+    }
+}
+
+tokenresult = 
+{
+    "token": String,    # Token value
+    "issuedAt": Time,   # Time of token creation
+    "expiration": Time, # Expiration time of the token
+    "scope": String,    # Scope scope of the token
+    "issuer": String    # Issuer authority
+}
+
+uuid = String #example: "688b7fb2-92d1-49cb-0011-4212979ad6cf" 
+
+
+Endpoint: /admin/new/device y
+    Method: Post y
+    Body: device y
+    param:  y
+    returns:  y
+    comment: Creates a new device y
+
+Endpoint: /admin/new/list
+    Method: Post
+    Body: Array of device
+    param:
+    returns: 
+    comment: Create a list of devices
+
+Endpoint: /admin/patch 
+    Method: Patch
+    Body: device
+    param: 
+    returns: 
+    comment: Patches a device
+
+Endpoint: /admin/remove/device
+    Method: Delete
+    Body: 
+    param: UUID
+    returns: 
+    comment: Removes a dvice by given UUID
+
+Endpoint: /admin/remove/list
+    Method: Delete
+    Body: Array of UUIDs
+    param:
+    returns: Array of removed UUIDs
+    comment: Removes a list of devices by given UUIDs
+
+
+
+
+Endpoint: /device/{UUID}
+    Method: Patch
+    Body: 
+    param: 
+        - battery:      Integer     # new battery value, Optional
+        - waterLevel:   Integer     # new value of the water level, Optional
+    returns: 
+    {UUID}: Device UUID
+    comment: Patches a device specified by the UUID
+
+Endpoint: /device/{UUID}
+    Method: Get
+    Body: 
+    param:
+    returns: device
+    {UUID}: Device UUID
+    
+Endpoint: /device/all
+    Method: Get
+    Body: 
+    param: 
+    returns: Array of device
+    
+Endpoint: /device/battery
+    Method: Get
+    Body: 
+    param: Number, Threshold value
+    returns: Array of device where battery percentage is below the given threshold
+    comment: This endpoint returns all devices with a battery charge level below a given value
+    
+Endpoint: /device/minimum
+    Method: Get
+    Body: 
+    param: Number, Threshold value
+    returns: Array of device where water levelis below the given threshold
+    comment: This endpoint returns all devices where the water level is below a given value
+    
+
+
+
+Endpoint: /token/create
+    Method: Get
+    Header: Username and Password encoded as Basic authentication
+    Body: 
+    param: 
+    returns: tokenresult
+    comment: Creates/Renews a JWT token
+    
+Endpoint: /token/renew
+    Method: Get
+    Header: Username and Password encoded as Basic authentication
+    Body: 
+    param: 
+    returns: tokenresult
+    comment: Creates/Renews a JWT token
+
+
+
+maven create docker image
+mvn clean compile package
+mvn spring-boot:build-image
+
+Export docker image to tar
+docker save --output xilab.tar xilab:0.0.1
+
+Import docker image from tar
+docker load --input .\xilab.tar
